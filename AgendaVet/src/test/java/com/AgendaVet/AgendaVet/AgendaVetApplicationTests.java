@@ -9,5 +9,4 @@ class AgendaVetApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
