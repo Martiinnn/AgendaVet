@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
-    List<Reserva> findByUsuarioId(Integer usuarioId);
-    List<Reserva> findByVeterinariaId(Integer veterinariaId);
+    List<Reserva> findByUsuario_Id(Integer usuarioId);
+    List<Reserva> findByVeterinaria_Id(Integer veterinariaId);
 }

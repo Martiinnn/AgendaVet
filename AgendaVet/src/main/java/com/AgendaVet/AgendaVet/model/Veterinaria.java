@@ -23,6 +23,7 @@ public class Veterinaria {
     private List<Reserva> reservas;
     
     @OneToMany(mappedBy = "veterinaria", cascade = CascadeType.ALL)
+    @com.fasterxml.jackson.annotation.JsonManagedReference
     private List<Servicio> servicios;
     
     @OneToMany(mappedBy = "veterinaria", cascade = CascadeType.ALL)

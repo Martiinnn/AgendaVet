@@ -20,6 +20,7 @@ public class Servicio {
     
     @ManyToOne
     @JoinColumn(name = "veterinaria_id")
+    @com.fasterxml.jackson.annotation.JsonBackReference
     private Veterinaria veterinaria;
     
     @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)

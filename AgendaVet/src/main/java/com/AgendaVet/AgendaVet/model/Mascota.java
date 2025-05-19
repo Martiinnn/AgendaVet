@@ -23,5 +23,16 @@ public class Mascota {
     private Usuario propietario;
     
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL)
-    private List<Reserva> reservas;
+    private List<Reserva> reservas;    
+
+    public Integer getUsuarioId() {
+        return propietario != null ? propietario.getId() : null;
+    }    
+
+    public void setUsuarioId(Integer usuarioId) {
+        if (propietario == null) {
+            propietario = new Usuario();
+        }
+        propietario.setId(usuarioId);
+    }
 }
