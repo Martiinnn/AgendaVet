@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.CascadeType;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
