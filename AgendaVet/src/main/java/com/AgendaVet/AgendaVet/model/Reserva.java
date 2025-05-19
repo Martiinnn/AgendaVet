@@ -1,7 +1,12 @@
 package com.AgendaVet.AgendaVet.model;
 
-import jakarta.persistence.*;
-import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "reservas")
@@ -31,7 +36,6 @@ public class Reserva {
     @JoinColumn(name = "mascota_id")
     private Mascota mascota;
     
-    // Getters and setters for all fields
     public Integer getId() {
         return id;
     }
@@ -96,13 +100,11 @@ public class Reserva {
         this.mascota = mascota;
     }
     
-    // Methods to support repository queries
     public Integer getUsuarioId() {
         return usuario != null ? usuario.getId() : null;
     }
     
     public void setUsuarioId(Integer usuarioId) {
-        // This method is used by the service layer
     }
     
     public Integer getVeterinariaId() {
@@ -110,7 +112,6 @@ public class Reserva {
     }
     
     public void setVeterinariaId(Integer veterinariaId) {
-        // This method is used by the service layer
     }
     
     public Integer getServicioId() {
@@ -118,7 +119,6 @@ public class Reserva {
     }
     
     public void setServicioId(Integer servicioId) {
-        // This method is used by the service layer
     }
     
     public Long getMascotaId() {
@@ -126,6 +126,5 @@ public class Reserva {
     }
     
     public void setMascotaId(Long mascotaId) {
-        // This method is used by the service layer
     }
 }
