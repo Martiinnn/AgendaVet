@@ -6,11 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 
 @Entity
@@ -25,26 +23,28 @@ public class Reserva {
     private String hora;
     private String estado;
     
-    @JsonIgnore
-    @JsonManagedReference
     @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Notificacion> notificaciones;
     
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Usuario usuario;
     
     @ManyToOne
     @JoinColumn(name = "veterinaria_id")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Veterinaria veterinaria;
     
     @ManyToOne
     @JoinColumn(name = "servicio_id")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Servicio servicio;
     
     @ManyToOne
     @JoinColumn(name = "mascota_id")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Mascota mascota;
     
     public Integer getId() {
@@ -116,6 +116,10 @@ public class Reserva {
     }
     
     public void setUsuarioId(Integer usuarioId) {
+        if (usuario == null) {
+            usuario = new Usuario();
+        }
+        usuario.setId(usuarioId);
     }
     
     public Integer getVeterinariaId() {
@@ -123,6 +127,10 @@ public class Reserva {
     }
     
     public void setVeterinariaId(Integer veterinariaId) {
+        if (veterinaria == null) {
+            veterinaria = new Veterinaria();
+        }
+        veterinaria.setId(veterinariaId);
     }
     
     public Integer getServicioId() {
@@ -130,6 +138,10 @@ public class Reserva {
     }
     
     public void setServicioId(Integer servicioId) {
+        if (servicio == null) {
+            servicio = new Servicio();
+        }
+        servicio.setId(servicioId);
     }
     
     public Long getMascotaId() {
@@ -137,5 +149,9 @@ public class Reserva {
     }
     
     public void setMascotaId(Long mascotaId) {
+        if (mascota == null) {
+            mascota = new Mascota();
+        }
+        mascota.setId(mascotaId);
     }
 }

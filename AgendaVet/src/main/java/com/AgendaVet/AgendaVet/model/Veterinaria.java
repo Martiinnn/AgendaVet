@@ -26,12 +26,14 @@ public class Veterinaria {
     private String horario;
     
     @OneToMany(mappedBy = "veterinaria", cascade = CascadeType.ALL)
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Reserva> reservas;
     
     @OneToMany(mappedBy = "veterinaria", cascade = CascadeType.ALL)
-    @com.fasterxml.jackson.annotation.JsonManagedReference
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Servicio> servicios;
     
     @OneToMany(mappedBy = "veterinaria", cascade = CascadeType.ALL)
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Resena> resenas;
 }

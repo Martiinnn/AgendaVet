@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ResenaRepository extends JpaRepository<Resena, Integer> {
-    List<Resena> findByVeterinariaId(Integer veterinariaId);
-    List<Resena> findByUsuarioId(Integer usuarioId);
+    List<Resena> findByUsuario_Id(Integer usuarioId);
+    List<Resena> findByVeterinaria_Id(Integer veterinariaId);
 }

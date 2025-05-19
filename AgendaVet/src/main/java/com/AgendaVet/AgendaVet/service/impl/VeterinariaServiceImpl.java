@@ -28,6 +28,27 @@ public class VeterinariaServiceImpl implements VeterinariaService {
 
     @Override
     public Veterinaria save(Veterinaria veterinaria) {
+        if (veterinaria.getId() != null) {
+            Veterinaria existingVeterinaria = findById(veterinaria.getId());
+            if (existingVeterinaria != null) {
+                if (veterinaria.getNombre() != null) {
+                    existingVeterinaria.setNombre(veterinaria.getNombre());
+                }
+                if (veterinaria.getDireccion() != null) {
+                    existingVeterinaria.setDireccion(veterinaria.getDireccion());
+                }
+                if (veterinaria.getTelefono() != null) {
+                    existingVeterinaria.setTelefono(veterinaria.getTelefono());
+                }
+                if (veterinaria.getEmail() != null) {
+                    existingVeterinaria.setEmail(veterinaria.getEmail());
+                }
+                if (veterinaria.getHorario() != null) {
+                    existingVeterinaria.setHorario(veterinaria.getHorario());
+                }
+                return veterinariaRepository.save(existingVeterinaria);
+            }
+        }
         return veterinariaRepository.save(veterinaria);
     }
 

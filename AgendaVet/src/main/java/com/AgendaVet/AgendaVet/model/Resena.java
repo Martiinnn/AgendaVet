@@ -24,9 +24,33 @@ public class Resena {
     
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Usuario usuario;
     
     @ManyToOne
     @JoinColumn(name = "veterinaria_id")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Veterinaria veterinaria;
+
+    public Integer getUsuarioId() {
+        return usuario != null ? usuario.getId() : null;
+    }
+
+    public void setUsuarioId(Integer usuarioId) {
+        if (usuario == null) {
+            usuario = new Usuario();
+        }
+        usuario.setId(usuarioId);
+    }
+
+    public Integer getVeterinariaId() {
+        return veterinaria != null ? veterinaria.getId() : null;
+    }
+
+    public void setVeterinariaId(Integer veterinariaId) {
+        if (veterinaria == null) {
+            veterinaria = new Veterinaria();
+        }
+        veterinaria.setId(veterinariaId);
+    }
 }

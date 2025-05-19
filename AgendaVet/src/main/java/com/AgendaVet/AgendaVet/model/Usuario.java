@@ -9,6 +9,8 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
+import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "usuarios")
@@ -27,7 +29,8 @@ public class Usuario {
     private String direccion;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonManagedReference("reserva-usuario")
     private List<Reserva> reservas;
     
     @JsonIgnore

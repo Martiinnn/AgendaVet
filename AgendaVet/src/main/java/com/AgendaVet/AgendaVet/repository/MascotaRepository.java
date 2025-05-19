@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
-    // No tengo nada para poner aqui XD, aún
+    // Nada XD
 }

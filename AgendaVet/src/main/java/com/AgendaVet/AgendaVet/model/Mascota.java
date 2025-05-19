@@ -28,9 +28,11 @@ public class Mascota {
     
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Usuario propietario;
     
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL)
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Reserva> reservas;    
 
     public Integer getUsuarioId() {

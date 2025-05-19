@@ -28,9 +28,10 @@ public class Servicio {
     
     @ManyToOne
     @JoinColumn(name = "veterinaria_id")
-    @com.fasterxml.jackson.annotation.JsonBackReference
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Veterinaria veterinaria;
     
     @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Reserva> reservas;
 }

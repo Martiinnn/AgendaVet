@@ -36,12 +36,12 @@ public class ResenaServiceImpl implements ResenaService {
 
     @Override
     public List<Resena> findByVeterinariaId(Integer veterinariaId) {
-        return resenaRepository.findByVeterinariaId(veterinariaId);
+        return resenaRepository.findByVeterinaria_Id(veterinariaId);
     }
 
     @Override
     public List<Resena> findByUsuarioId(Integer usuarioId) {
-        return resenaRepository.findByUsuarioId(usuarioId);
+        return resenaRepository.findByUsuario_Id(usuarioId);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ResenaServiceImpl implements ResenaService {
             return 0.0;
         }
         return resenas.stream()
-                .mapToInt(Resena::getPuntuacion)
+                .mapToDouble(Resena::getPuntuacion)
                 .average()
                 .orElse(0.0);
     }
