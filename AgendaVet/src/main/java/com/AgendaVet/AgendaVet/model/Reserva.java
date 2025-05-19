@@ -6,7 +6,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 
 @Entity
 @Table(name = "reservas")
@@ -20,6 +25,12 @@ public class Reserva {
     private String hora;
     private String estado;
     
+    @JsonIgnore
+    @JsonManagedReference
+    @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
+    private List<Notificacion> notificaciones;
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

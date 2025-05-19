@@ -1,8 +1,10 @@
 package com.AgendaVet.AgendaVet.service.impl;
 
 import com.AgendaVet.AgendaVet.model.Notificacion;
+import com.AgendaVet.AgendaVet.model.Reserva;
 import com.AgendaVet.AgendaVet.repository.NotificacionRepository;
 import com.AgendaVet.AgendaVet.service.NotificacionService;
+import com.AgendaVet.AgendaVet.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class NotificacionServiceImpl implements NotificacionService {
 
     @Autowired
     private NotificacionRepository notificacionRepository;
+    
+    @Autowired
+    private ReservaService reservaService;
 
     @Override
     public List<Notificacion> findAll() {
@@ -41,11 +46,25 @@ public class NotificacionServiceImpl implements NotificacionService {
 
     @Override
     public Notificacion enviarNotificacionReserva(Integer reservaId) {
-        // Hay que crear lógica para crear y enviar notificación de reserva
+        Reserva reserva = reservaService.findById(reservaId);
+        if (reserva == null) {
+            throw new RuntimeException("Reserva no encontrada");
+        }
+        
         Notificacion notificacion = new Notificacion();
         notificacion.setTipo("RESERVA");
         notificacion.setLeido(false);
-        // agregar la lógica para obtener la reserva y crear el mensaje del coso
+        notificacion.setReserva(reserva);
+        notificacion.setUsuario(reserva.getUsuario());
+        
+        // Crear mensaje personalizado basado en el estado de la reserva
+        String mensaje = String.format("Tu reserva para %s en %s ha sido %s", 
+            reserva.getMascota().getNombre(),
+            reserva.getVeterinaria().getNombre(),
+            reserva.getEstado().toLowerCase());
+        
+        notificacion.setMensaje(mensaje);
+        
         return save(notificacion);
     }
 

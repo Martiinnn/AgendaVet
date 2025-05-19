@@ -8,6 +8,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 @Entity
@@ -26,9 +27,11 @@ public class Usuario {
     private String telefono;
     private String direccion;
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
     private List<Reserva> reservas;
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
     private List<Notificacion> notificaciones;
 }
