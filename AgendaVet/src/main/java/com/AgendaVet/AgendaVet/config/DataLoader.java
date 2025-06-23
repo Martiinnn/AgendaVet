@@ -120,19 +120,22 @@ public class DataLoader implements CommandLineRunner {
             reserva.setHora(LocalTime.of(random.nextInt(10) + 8, random.nextInt(2) * 30));
             
             reserva.setEstado(faker.options().option("PENDIENTE", "CONFIRMADA", "COMPLETADA", "CANCELADA"));
-            // Eliminar: reserva.setObservaciones(faker.lorem().sentence());
             reservaRepository.save(reserva);
         }
 
         List<Reserva> reservas = reservaRepository.findAll();
 
-        // Crear Reseñas
         for (int i = 0; i < 15; i++) {
             Resena resena = new Resena();
             resena.setUsuario(usuarios.get(random.nextInt(usuarios.size())));
             resena.setVeterinaria(veterinarias.get(random.nextInt(veterinarias.size())));
             resena.setPuntuacion(random.nextInt(5) + 1);
-            resena.setComentario(faker.lorem().paragraph());
+            // esto me tiraba el programaaaaaaaaaaaaaaaaaaaaaa
+            String comentario = faker.lorem().sentence(10);
+            if (comentario.length() > 255) {
+                comentario = comentario.substring(0, 255);
+            }
+            resena.setComentario(comentario);
             resena.setFecha(LocalDate.now().minusDays(random.nextInt(90)).toString());
             resenaRepository.save(resena);
         }

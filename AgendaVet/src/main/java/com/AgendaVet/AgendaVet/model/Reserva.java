@@ -45,7 +45,6 @@ public class Reserva {
     @JsonIgnore
     private Mascota mascota;
 
-    // Métodos para obtener IDs asociados (opcional)
     public Long getUsuarioId() {
         return usuario != null ? usuario.getId() : null;
     }

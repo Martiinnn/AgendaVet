@@ -10,12 +10,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
@@ -54,7 +57,7 @@ public class ReservaControllerV2 {
         return ResponseEntity.ok(assembler.toModel(reserva));
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Crear nueva reserva")
     @ApiResponse(responseCode = "201", description = "Reserva creada exitosamente")
     public ResponseEntity<EntityModel<Reserva>> createReserva(@RequestBody Reserva reserva) {
@@ -62,7 +65,7 @@ public class ReservaControllerV2 {
         return ResponseEntity.status(HttpStatus.CREATED).body(assembler.toModel(savedReserva));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Actualizar reserva")
     @ApiResponse(responseCode = "200", description = "Reserva actualizada exitosamente")
     public ResponseEntity<EntityModel<Reserva>> updateReserva(
@@ -126,5 +129,65 @@ public class ReservaControllerV2 {
             @RequestBody String estado) {
         Reserva updatedReserva = reservaService.updateEstado(id, estado);
         return ResponseEntity.ok(assembler.toModel(updatedReserva));
+    }
+    
+    @GetMapping(value = "/usuario/{usuarioId}/estado/{estado}", produces = MediaTypes.HAL_JSON_VALUE)
+    @Operation(summary = "Obtener reservas por usuario y estado")
+    @ApiResponse(responseCode = "200", description = "Lista de reservas obtenida exitosamente")
+    public CollectionModel<EntityModel<Reserva>> getReservasByUsuarioAndEstado(
+            @Parameter(description = "ID del usuario") @PathVariable Long usuarioId,
+            @Parameter(description = "Estado de la reserva") @PathVariable String estado) {
+        List<EntityModel<Reserva>> reservas = reservaService.findByUsuarioIdAndEstado(usuarioId, estado).stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+        
+        return CollectionModel.of(reservas,
+                linkTo(methodOn(ReservaControllerV2.class).getReservasByUsuarioAndEstado(usuarioId, estado)).withSelfRel(),
+                linkTo(methodOn(ReservaControllerV2.class).getAllReservas()).withRel("all-reservas"));
+    }
+    
+    @GetMapping(value = "/veterinaria/{veterinariaId}/fecha/{fecha}", produces = MediaTypes.HAL_JSON_VALUE)
+    @Operation(summary = "Obtener reservas por veterinaria y fecha")
+    @ApiResponse(responseCode = "200", description = "Lista de reservas obtenida exitosamente")
+    public CollectionModel<EntityModel<Reserva>> getReservasByVeterinariaAndFecha(
+            @Parameter(description = "ID de la veterinaria") @PathVariable Long veterinariaId,
+            @Parameter(description = "Fecha de la reserva") @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+        List<EntityModel<Reserva>> reservas = reservaService.findByVeterinariaIdAndFecha(veterinariaId, fecha).stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+        
+        return CollectionModel.of(reservas,
+                linkTo(methodOn(ReservaControllerV2.class).getReservasByVeterinariaAndFecha(veterinariaId, fecha)).withSelfRel(),
+                linkTo(methodOn(ReservaControllerV2.class).getAllReservas()).withRel("all-reservas"));
+    }
+    
+    @GetMapping(value = "/usuario/{usuarioId}/veterinaria/{veterinariaId}", produces = MediaTypes.HAL_JSON_VALUE)
+    @Operation(summary = "Obtener reservas por usuario y veterinaria")
+    @ApiResponse(responseCode = "200", description = "Lista de reservas obtenida exitosamente")
+    public CollectionModel<EntityModel<Reserva>> getReservasByUsuarioAndVeterinaria(
+            @Parameter(description = "ID del usuario") @PathVariable Long usuarioId,
+            @Parameter(description = "ID de la veterinaria") @PathVariable Long veterinariaId) {
+        List<EntityModel<Reserva>> reservas = reservaService.findByUsuarioIdAndVeterinariaId(usuarioId, veterinariaId).stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+        
+        return CollectionModel.of(reservas,
+                linkTo(methodOn(ReservaControllerV2.class).getReservasByUsuarioAndVeterinaria(usuarioId, veterinariaId)).withSelfRel(),
+                linkTo(methodOn(ReservaControllerV2.class).getAllReservas()).withRel("all-reservas"));
+    }
+    
+    @GetMapping("/mascota/{mascotaId}/estado/{estado}")
+    @Operation(summary = "Obtener reservas por mascota y estado")
+    @ApiResponse(responseCode = "200", description = "Lista de reservas obtenida exitosamente")
+    public CollectionModel<EntityModel<Reserva>> getReservasByMascotaAndEstado(
+            @Parameter(description = "ID de la mascota") @PathVariable Long mascotaId,
+            @Parameter(description = "Estado de la reserva") @PathVariable String estado) {
+        List<EntityModel<Reserva>> reservas = reservaService.findByMascotaIdAndEstado(mascotaId, estado).stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+        
+        return CollectionModel.of(reservas,
+                linkTo(methodOn(ReservaControllerV2.class).getReservasByMascotaAndEstado(mascotaId, estado)).withSelfRel(),
+                linkTo(methodOn(ReservaControllerV2.class).getAllReservas()).withRel("all-reservas"));
     }
 }

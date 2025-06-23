@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.time.LocalDate;
 
 @Service
 public class ReservaServiceImpl implements ReservaService {
@@ -91,5 +92,25 @@ public class ReservaServiceImpl implements ReservaService {
             return save(reserva);
         }
         return null;
+    }    
+
+    @Override
+    public List<Reserva> findByUsuarioIdAndEstado(Long usuarioId, String estado) {
+        return reservaRepository.findByUsuario_IdAndEstado(usuarioId, estado);
+    }
+    
+    @Override
+    public List<Reserva> findByVeterinariaIdAndFecha(Long veterinariaId, LocalDate fecha) {
+        return reservaRepository.findByVeterinaria_IdAndFecha(veterinariaId, fecha);
+    }
+    
+    @Override
+    public List<Reserva> findByUsuarioIdAndVeterinariaId(Long usuarioId, Long veterinariaId) {
+        return reservaRepository.findByUsuario_IdAndVeterinaria_Id(usuarioId, veterinariaId);
+    }
+    
+    @Override
+    public List<Reserva> findByMascotaIdAndEstado(Long mascotaId, String estado) {
+        return reservaRepository.findByMascota_IdAndEstado(mascotaId, estado);
     }
 }

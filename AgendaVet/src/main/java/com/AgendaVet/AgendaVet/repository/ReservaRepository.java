@@ -18,16 +18,13 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
     void deleteByMascota(Mascota mascota);
     
-    // Estos tienen mas parametros
+    // 2 Parametros
     List<Reserva> findByUsuario_IdAndEstado(Long usuarioId, String estado);
     
     List<Reserva> findByVeterinaria_IdAndFecha(Long veterinariaId, LocalDate fecha);
     
-    List<Reserva> findByFechaAndEstado(LocalDate fecha, String estado);
-    
     List<Reserva> findByUsuario_IdAndVeterinaria_Id(Long usuarioId, Long veterinariaId);
     
-    List<Reserva> findByMascota_IdAndEstado(Long mascotaId, String estado);
+    List<Reserva> findByMascota_IdAndEstado(Long mascotaId, String estado);    
     
-    List<Reserva> findByFechaBetweenAndEstado(LocalDate fechaInicio, LocalDate fechaFin, String estado);
 }

@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class VeterinariaControllerV2 {
     @Autowired
     private VeterinariaModelAssembler assembler;
 
-    @GetMapping
+    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Obtener todas las veterinarias")
     @ApiResponse(responseCode = "200", description = "Lista de veterinarias obtenida exitosamente")
     public CollectionModel<EntityModel<Veterinaria>> getAllVeterinarias() {
@@ -45,7 +46,7 @@ public class VeterinariaControllerV2 {
                 linkTo(methodOn(VeterinariaControllerV2.class).getAllVeterinarias()).withSelfRel());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Obtener veterinaria por ID")
     @ApiResponse(responseCode = "200", description = "Veterinaria encontrada")
     public ResponseEntity<EntityModel<Veterinaria>> getVeterinariaById(
@@ -57,7 +58,7 @@ public class VeterinariaControllerV2 {
         return ResponseEntity.ok(assembler.toModel(veterinaria));
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Crear nueva veterinaria")
     @ApiResponse(responseCode = "201", description = "Veterinaria creada exitosamente")
     public ResponseEntity<EntityModel<Veterinaria>> createVeterinaria(@RequestBody Veterinaria veterinaria) {
@@ -65,7 +66,7 @@ public class VeterinariaControllerV2 {
         return ResponseEntity.status(HttpStatus.CREATED).body(assembler.toModel(savedVeterinaria));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Actualizar veterinaria")
     @ApiResponse(responseCode = "200", description = "Veterinaria actualizada exitosamente")
     public ResponseEntity<EntityModel<Veterinaria>> updateVeterinaria(
@@ -80,7 +81,7 @@ public class VeterinariaControllerV2 {
         return ResponseEntity.ok(assembler.toModel(updatedVeterinaria));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Eliminar veterinaria")
     @ApiResponse(responseCode = "204", description = "Veterinaria eliminada exitosamente")
     public ResponseEntity<Void> deleteVeterinaria(

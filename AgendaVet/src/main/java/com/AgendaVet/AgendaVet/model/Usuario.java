@@ -23,7 +23,11 @@ public class Usuario {
     
     private String nombre;
     private String email;
+    
+    // No devolver la contraseña
+    @JsonIgnore
     private String contrasena;
+    
     private String rol;
     private String telefono;
     private String direccion;
