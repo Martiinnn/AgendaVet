@@ -17,11 +17,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("AgendaVet API")
                         .version("3.0")
-                )
-                .servers(List.of(
-                        new Server()
-                                .url("http://localhost:8080")
-                                .description("Servidor de Desarrollo")
-                ));
+                );
     }
 }
