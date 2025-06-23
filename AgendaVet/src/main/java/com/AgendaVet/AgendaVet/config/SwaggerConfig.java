@@ -18,19 +18,10 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("AgendaVet API")
-                        .version("2.0")
-                        .description("API REST para el sistema de gestión de citas veterinarias AgendaVet. " +
-                                   "Esta API permite gestionar usuarios, mascotas, veterinarias, reservas, reseñas y notificaciones.")
-                        .contact(new Contact()
-                                .name("Equipo AgendaVet")
-                                .email("contacto@agendavet.com")
-                                .url("https://agendavet.com"))
-                        .license(new License()
-                                .name("MIT License")
-                                .url("https://opensource.org/licenses/MIT")))
+                        .version("3.0")
                 .servers(List.of(
-                        new Server().url("http://localhost:8080").description("Servidor de Desarrollo"),
-                        new Server().url("https://api.agendavet.com").description("Servidor de Producción")
+                        new Server().url("http://localhost:8080").description("Servidor de Desarrollo")
+                        
                 ));
     }
 }
