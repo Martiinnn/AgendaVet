@@ -34,12 +34,15 @@ public class Usuario {
     private List<Reserva> reservas;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notificacion> notificaciones;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Resena> resenas;
 
     @JsonIgnore
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
     @JsonManagedReference("mascota-propietario")
     private List<Mascota> mascotas;
-
 }

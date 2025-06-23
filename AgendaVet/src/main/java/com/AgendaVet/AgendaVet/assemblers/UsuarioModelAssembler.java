@@ -2,7 +2,7 @@ package com.AgendaVet.AgendaVet.assemblers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
-import com.AgendaVet.AgendaVet.controller.UsuarioControllerV2;
+import com.AgendaVet.AgendaVet.controller.V2.UsuarioControllerV2;
 import com.AgendaVet.AgendaVet.model.Usuario;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;

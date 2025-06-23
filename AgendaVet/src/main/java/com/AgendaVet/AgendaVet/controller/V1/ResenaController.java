@@ -1,4 +1,4 @@
-package com.AgendaVet.AgendaVet.controller;
+package com.AgendaVet.AgendaVet.controller.V1;
 
 import com.AgendaVet.AgendaVet.model.Resena;
 import com.AgendaVet.AgendaVet.service.ResenaService;

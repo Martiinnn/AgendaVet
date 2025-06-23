@@ -1,4 +1,4 @@
-package com.AgendaVet.AgendaVet.controller;
+package com.AgendaVet.AgendaVet.controller.V1;
 
 import com.AgendaVet.AgendaVet.model.Veterinaria;
 import com.AgendaVet.AgendaVet.model.Servicio;

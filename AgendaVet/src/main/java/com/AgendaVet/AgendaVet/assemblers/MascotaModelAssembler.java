@@ -2,7 +2,7 @@ package com.AgendaVet.AgendaVet.assemblers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
-import com.AgendaVet.AgendaVet.controller.MascotaControllerV2;
+import com.AgendaVet.AgendaVet.controller.V2.MascotaControllerV2;
 import com.AgendaVet.AgendaVet.model.Mascota;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -17,9 +17,9 @@ public class MascotaModelAssembler implements RepresentationModelAssembler<Masco
         return EntityModel.of(mascota,
                 linkTo(methodOn(MascotaControllerV2.class).getMascotaByCodigo(mascota.getId())).withSelfRel(),
                 linkTo(methodOn(MascotaControllerV2.class).getAllmascotas()).withRel("mascotas"),
-                linkTo(methodOn(MascotaControllerV2.class).updateMascota(mascota.getId(), mascota)).withRel("actualizar"),
+                linkTo(methodOn(MascotaControllerV2.class).updateMascota(mascota.getId(), null)).withRel("actualizar"),
                 linkTo(methodOn(MascotaControllerV2.class).deleteMascota(mascota.getId())).withRel("eliminar"),
-                linkTo(methodOn(MascotaControllerV2.class).patchMascota(mascota.getId(), mascota)).withRel("actualizar-parcial")
+                linkTo(methodOn(MascotaControllerV2.class).patchMascota(mascota.getId(), null)).withRel("actualizar-parcial")
         );
     }
 }
