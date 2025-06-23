@@ -1,5 +1,6 @@
 package com.AgendaVet.AgendaVet.assemblers;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import com.AgendaVet.AgendaVet.controller.V2.ReservaControllerV2;
 import com.AgendaVet.AgendaVet.model.Reserva;
