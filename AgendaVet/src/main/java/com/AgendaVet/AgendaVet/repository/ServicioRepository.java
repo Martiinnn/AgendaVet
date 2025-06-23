@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ServicioRepository extends JpaRepository<Servicio, Integer> {
-    List<Servicio> findByVeterinariaId(Integer veterinariaId);
+public interface ServicioRepository extends JpaRepository<Servicio, Long> {
+    List<Servicio> findByVeterinaria_Id(Long veterinariaId);
 }

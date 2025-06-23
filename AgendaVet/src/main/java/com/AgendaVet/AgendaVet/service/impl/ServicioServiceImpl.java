@@ -20,7 +20,7 @@ public class ServicioServiceImpl implements ServicioService {
     }
 
     @Override
-    public Servicio findById(Integer id) {
+    public Servicio findById(Long id) {
         return servicioRepository.findById(id).orElse(null);
     }
 
@@ -30,12 +30,12 @@ public class ServicioServiceImpl implements ServicioService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         servicioRepository.deleteById(id);
     }
 
     @Override
-    public List<Servicio> findByVeterinariaId(Integer veterinariaId) {
-        return servicioRepository.findByVeterinariaId(veterinariaId);
+    public List<Servicio> findByVeterinariaId(Long veterinariaId) {
+        return servicioRepository.findByVeterinaria_Id(veterinariaId);
     }
 }

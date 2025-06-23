@@ -46,4 +46,21 @@ public class MascotaServiceImpl implements MascotaService {
     public void deleteById(Long id) {
         mascotaRepository.deleteById(id);
     }
+
+    @Override
+    public List<Mascota> findByUsuarioId(Long usuarioId) {
+        return mascotaRepository.findByPropietario_Id(usuarioId);
+    }
+
+    @Override
+    public Mascota patchMascota(Long id, Mascota mascota) {
+        Mascota existente = mascotaRepository.findById(id).orElse(null);
+        if (existente == null) return null;
+        if (mascota.getNombre() != null) existente.setNombre(mascota.getNombre());
+        if (mascota.getEspecie() != null) existente.setEspecie(mascota.getEspecie());
+        if (mascota.getRaza() != null) existente.setRaza(mascota.getRaza());
+        if (mascota.getEdad() != null) existente.setEdad(mascota.getEdad());
+
+        return mascotaRepository.save(existente);
+    }
 }

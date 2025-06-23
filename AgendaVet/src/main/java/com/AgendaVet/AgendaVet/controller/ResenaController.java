@@ -29,7 +29,7 @@ public class ResenaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Resena> getResenaById(@PathVariable Integer id) {
+    public ResponseEntity<Resena> getResenaById(@PathVariable Long id) {
         Resena resena = resenaService.findById(id);
         return resena != null ? 
                new ResponseEntity<>(resena, HttpStatus.OK) : 
@@ -42,7 +42,7 @@ public class ResenaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Resena> updateResena(@PathVariable Integer id, @RequestBody Resena resena) {
+    public ResponseEntity<Resena> updateResena(@PathVariable Long id, @RequestBody Resena resena) {
         Resena existingResena = resenaService.findById(id);
         if (existingResena == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ public class ResenaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteResena(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteResena(@PathVariable Long id) {
         Resena existingResena = resenaService.findById(id);
         if (existingResena == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,17 +62,17 @@ public class ResenaController {
     }
     
     @GetMapping("/veterinaria/{veterinariaId}")
-    public ResponseEntity<List<Resena>> getResenasByVeterinaria(@PathVariable Integer veterinariaId) {
+    public ResponseEntity<List<Resena>> getResenasByVeterinaria(@PathVariable Long veterinariaId) {
         return new ResponseEntity<>(resenaService.findByVeterinariaId(veterinariaId), HttpStatus.OK);
     }
     
     @GetMapping("/usuario/{usuarioId}")
-    public ResponseEntity<List<Resena>> getResenasByUsuario(@PathVariable Integer usuarioId) {
+    public ResponseEntity<List<Resena>> getResenasByUsuario(@PathVariable Long usuarioId) {
         return new ResponseEntity<>(resenaService.findByUsuarioId(usuarioId), HttpStatus.OK);
     }
     
     @GetMapping("/veterinaria/{veterinariaId}/promedio")
-    public ResponseEntity<Double> getPromedioCalificacionByVeterinaria(@PathVariable Integer veterinariaId) {
+    public ResponseEntity<Double> getPromedioCalificacionByVeterinaria(@PathVariable Long veterinariaId) {
         return new ResponseEntity<>(resenaService.getPromedioCalificacionByVeterinaria(veterinariaId), HttpStatus.OK);
     }
 }

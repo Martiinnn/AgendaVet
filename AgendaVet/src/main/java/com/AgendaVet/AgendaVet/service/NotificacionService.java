@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface NotificacionService {
     List<Notificacion> findAll();
-    Notificacion findById(Integer id);
+    Notificacion findById(Long id);
     Notificacion save(Notificacion notificacion);
-    void deleteById(Integer id);
-    List<Notificacion> findByUsuarioId(Integer usuarioId);
-    Notificacion enviarNotificacionReserva(Integer reservaId);
-    Notificacion marcarComoLeido(Integer id);
+    void deleteById(Long id);
+    List<Notificacion> findByUsuarioId(Long usuarioId);
+    Notificacion enviarNotificacionReserva(Long reservaId);
+    Notificacion marcarComoLeido(Long id);
 }

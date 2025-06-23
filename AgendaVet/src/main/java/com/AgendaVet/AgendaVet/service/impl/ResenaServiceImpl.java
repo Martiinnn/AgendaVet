@@ -20,7 +20,7 @@ public class ResenaServiceImpl implements ResenaService {
     }
 
     @Override
-    public Resena findById(Integer id) {
+    public Resena findById(Long id) {
         return resenaRepository.findById(id).orElse(null);
     }
 
@@ -30,22 +30,22 @@ public class ResenaServiceImpl implements ResenaService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         resenaRepository.deleteById(id);
     }
 
     @Override
-    public List<Resena> findByVeterinariaId(Integer veterinariaId) {
+    public List<Resena> findByVeterinariaId(Long veterinariaId) {
         return resenaRepository.findByVeterinaria_Id(veterinariaId);
     }
 
     @Override
-    public List<Resena> findByUsuarioId(Integer usuarioId) {
+    public List<Resena> findByUsuarioId(Long usuarioId) {
         return resenaRepository.findByUsuario_Id(usuarioId);
     }
 
     @Override
-    public Double getPromedioCalificacionByVeterinaria(Integer veterinariaId) {
+    public Double getPromedioCalificacionByVeterinaria(Long veterinariaId) {
         List<Resena> resenas = findByVeterinariaId(veterinariaId);
         if (resenas.isEmpty()) {
             return 0.0;

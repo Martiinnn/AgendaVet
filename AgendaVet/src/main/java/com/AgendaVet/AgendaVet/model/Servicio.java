@@ -19,7 +19,7 @@ public class Servicio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     
     private String nombre;
     private String descripcion;
@@ -34,4 +34,15 @@ public class Servicio {
     @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
     @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Reserva> reservas;
+
+    public Long getVeterinariaId() {
+        return veterinaria != null ? veterinaria.getId() : null;
+    }
+
+    public void setVeterinariaId(Long veterinariaId) {
+        if (veterinaria == null) {
+            veterinaria = new Veterinaria();
+        }
+        veterinaria.setId(veterinariaId);
+    }
 }

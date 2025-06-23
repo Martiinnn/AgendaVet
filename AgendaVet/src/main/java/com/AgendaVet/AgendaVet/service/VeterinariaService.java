@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface VeterinariaService {
     List<Veterinaria> findAll();
-    Veterinaria findById(Integer id);
+    Veterinaria findById(Long id);
     Veterinaria save(Veterinaria veterinaria);
-    void deleteById(Integer id);
-    Servicio addServicio(Integer veterinariaId, Servicio servicio);
-    List<Servicio> findServiciosByVeterinariaId(Integer veterinariaId);
-    Veterinaria updateHorarios(Integer veterinariaId, String horarios);
+    void deleteById(Long id);
+    Servicio addServicio(Long veterinariaId, Servicio servicio);
+    List<Servicio> findServiciosByVeterinariaId(Long veterinariaId);
+    Veterinaria updateHorarios(Long veterinariaId, String horarios);
 }

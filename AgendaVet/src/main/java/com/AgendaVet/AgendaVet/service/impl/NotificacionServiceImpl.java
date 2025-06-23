@@ -25,7 +25,7 @@ public class NotificacionServiceImpl implements NotificacionService {
     }
 
     @Override
-    public Notificacion findById(Integer id) {
+    public Notificacion findById(Long id) {
         return notificacionRepository.findById(id).orElse(null);
     }
 
@@ -35,17 +35,17 @@ public class NotificacionServiceImpl implements NotificacionService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         notificacionRepository.deleteById(id);
     }
 
     @Override
-    public List<Notificacion> findByUsuarioId(Integer usuarioId) {
+    public List<Notificacion> findByUsuarioId(Long usuarioId) {
         return notificacionRepository.findByUsuarioId(usuarioId);
     }
 
     @Override
-    public Notificacion enviarNotificacionReserva(Integer reservaId) {
+    public Notificacion enviarNotificacionReserva(Long reservaId) {
         Reserva reserva = reservaService.findById(reservaId);
         if (reserva == null) {
             throw new RuntimeException("Reserva no encontrada");
@@ -57,7 +57,6 @@ public class NotificacionServiceImpl implements NotificacionService {
         notificacion.setReserva(reserva);
         notificacion.setUsuario(reserva.getUsuario());
         
-        // Crear mensaje personalizado basado en el estado de la reserva
         String mensaje = String.format("Tu reserva para %s en %s ha sido %s", 
             reserva.getMascota().getNombre(),
             reserva.getVeterinaria().getNombre(),
@@ -69,7 +68,7 @@ public class NotificacionServiceImpl implements NotificacionService {
     }
 
     @Override
-    public Notificacion marcarComoLeido(Integer id) {
+    public Notificacion marcarComoLeido(Long id) {
         Notificacion notificacion = findById(id);
         if (notificacion != null) {
             notificacion.setLeido(true);

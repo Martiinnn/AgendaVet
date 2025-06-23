@@ -22,7 +22,7 @@ public class VeterinariaServiceImpl implements VeterinariaService {
     }
 
     @Override
-    public Veterinaria findById(Integer id) {
+    public Veterinaria findById(Long id) {
         return veterinariaRepository.findById(id).orElse(null);
     }
 
@@ -53,12 +53,12 @@ public class VeterinariaServiceImpl implements VeterinariaService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         veterinariaRepository.deleteById(id);
     }
 
     @Override
-    public Servicio addServicio(Integer veterinariaId, Servicio servicio) {
+    public Servicio addServicio(Long veterinariaId, Servicio servicio) {
         Veterinaria veterinaria = findById(veterinariaId);
         if (veterinaria != null) {
             servicio.setVeterinaria(veterinaria);
@@ -73,13 +73,13 @@ public class VeterinariaServiceImpl implements VeterinariaService {
     }
 
     @Override
-    public List<Servicio> findServiciosByVeterinariaId(Integer veterinariaId) {
+    public List<Servicio> findServiciosByVeterinariaId(Long veterinariaId) {
         Veterinaria veterinaria = findById(veterinariaId);
         return veterinaria != null ? veterinaria.getServicios() : new ArrayList<>();
     }
 
     @Override
-    public Veterinaria updateHorarios(Integer veterinariaId, String horarios) {
+    public Veterinaria updateHorarios(Long veterinariaId, String horarios) {
         Veterinaria veterinaria = findById(veterinariaId);
         if (veterinaria != null) {
             veterinaria.setHorario(horarios);

@@ -16,7 +16,7 @@ public class Resena {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     
     private String comentario;
     private Integer puntuacion;
@@ -32,22 +32,22 @@ public class Resena {
     @com.fasterxml.jackson.annotation.JsonIgnore
     private Veterinaria veterinaria;
 
-    public Integer getUsuarioId() {
+    public Long getUsuarioId() {
         return usuario != null ? usuario.getId() : null;
     }
 
-    public void setUsuarioId(Integer usuarioId) {
+    public void setUsuarioId(Long usuarioId) {
         if (usuario == null) {
             usuario = new Usuario();
         }
         usuario.setId(usuarioId);
     }
 
-    public Integer getVeterinariaId() {
+    public Long getVeterinariaId() {
         return veterinaria != null ? veterinaria.getId() : null;
     }
 
-    public void setVeterinariaId(Integer veterinariaId) {
+    public void setVeterinariaId(Long veterinariaId) {
         if (veterinaria == null) {
             veterinaria = new Veterinaria();
         }

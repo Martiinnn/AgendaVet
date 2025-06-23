@@ -3,7 +3,6 @@ package com.AgendaVet.AgendaVet.service.impl;
 import com.AgendaVet.AgendaVet.model.Usuario;
 import com.AgendaVet.AgendaVet.repository.UsuarioRepository;
 import com.AgendaVet.AgendaVet.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.List;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @Override
     public List<Usuario> findAll() {
@@ -20,7 +22,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario findById(Integer id) {
+    public Usuario findById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +32,24 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void deleteById(Integer id) {
-        usuarioRepository.deleteById(id);
+    public void deleteById(Long id) {
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+        }
     }
+
+    @Override
+    public Usuario patchUsuario(Long id, Usuario usuario) {
+        Usuario existente = usuarioRepository.findById(id).orElse(null);
+        if (existente == null) return null;
+
+        if (usuario.getNombre() != null) existente.setNombre(usuario.getNombre());
+        if (usuario.getEmail() != null) existente.setEmail(usuario.getEmail());
+        if (usuario.getContrasena() != null) existente.setContrasena(usuario.getContrasena());
+        if (usuario.getRol() != null) existente.setRol(usuario.getRol());
+        if (usuario.getTelefono() != null) existente.setTelefono(usuario.getTelefono());
+        if (usuario.getDireccion() != null) existente.setDireccion(usuario.getDireccion());
+
+        return usuarioRepository.save(existente);
+    }   
 }

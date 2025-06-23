@@ -29,7 +29,7 @@ public class ReservaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reserva> getReservaById(@PathVariable Integer id) {
+    public ResponseEntity<Reserva> getReservaById(@PathVariable Long id) {
         Reserva reserva = reservaService.findById(id);
         return reserva != null ? 
                new ResponseEntity<>(reserva, HttpStatus.OK) : 
@@ -42,7 +42,7 @@ public class ReservaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Reserva> updateReserva(@PathVariable Integer id, @RequestBody Reserva reserva) {
+    public ResponseEntity<Reserva> updateReserva(@PathVariable Long id, @RequestBody Reserva reserva) {
         Reserva existingReserva = reservaService.findById(id);
         if (existingReserva == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ public class ReservaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReserva(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteReserva(@PathVariable Long id) {
         Reserva existingReserva = reservaService.findById(id);
         if (existingReserva == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,17 +62,17 @@ public class ReservaController {
     }
     
     @GetMapping("/usuario/{usuarioId}")
-    public ResponseEntity<List<Reserva>> getReservasByUsuario(@PathVariable Integer usuarioId) {
+    public ResponseEntity<List<Reserva>> getReservasByUsuario(@PathVariable Long usuarioId) {
         return new ResponseEntity<>(reservaService.findByUsuarioId(usuarioId), HttpStatus.OK);
     }
     
     @GetMapping("/veterinaria/{veterinariaId}")
-    public ResponseEntity<List<Reserva>> getReservasByVeterinaria(@PathVariable Integer veterinariaId) {
+    public ResponseEntity<List<Reserva>> getReservasByVeterinaria(@PathVariable Long veterinariaId) {
         return new ResponseEntity<>(reservaService.findByVeterinariaId(veterinariaId), HttpStatus.OK);
     }
     
     @PutMapping("/{id}/estado")
-    public ResponseEntity<Reserva> updateEstadoReserva(@PathVariable Integer id, @RequestBody String estado) {
+    public ResponseEntity<Reserva> updateEstadoReserva(@PathVariable Long id, @RequestBody String estado) {
         return new ResponseEntity<>(reservaService.updateEstado(id, estado), HttpStatus.OK);
     }
 }

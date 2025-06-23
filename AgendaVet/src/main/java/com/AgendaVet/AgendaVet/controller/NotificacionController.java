@@ -29,7 +29,7 @@ public class NotificacionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Notificacion> getNotificacionById(@PathVariable Integer id) {
+    public ResponseEntity<Notificacion> getNotificacionById(@PathVariable Long id) {
         Notificacion notificacion = notificacionService.findById(id);
         return notificacion != null ? 
                new ResponseEntity<>(notificacion, HttpStatus.OK) : 
@@ -42,7 +42,7 @@ public class NotificacionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Notificacion> updateNotificacion(@PathVariable Integer id, @RequestBody Notificacion notificacion) {
+    public ResponseEntity<Notificacion> updateNotificacion(@PathVariable Long id, @RequestBody Notificacion notificacion) {
         Notificacion existingNotificacion = notificacionService.findById(id);
         if (existingNotificacion == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ public class NotificacionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteNotificacion(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteNotificacion(@PathVariable Long id) {
         Notificacion existingNotificacion = notificacionService.findById(id);
         if (existingNotificacion == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,17 +62,17 @@ public class NotificacionController {
     }
     
     @GetMapping("/usuario/{usuarioId}")
-    public ResponseEntity<List<Notificacion>> getNotificacionesByUsuario(@PathVariable Integer usuarioId) {
+    public ResponseEntity<List<Notificacion>> getNotificacionesByUsuario(@PathVariable Long usuarioId) {
         return new ResponseEntity<>(notificacionService.findByUsuarioId(usuarioId), HttpStatus.OK);
     }
     
     @PostMapping("/enviar/reserva/{reservaId}")
-    public ResponseEntity<Notificacion> enviarNotificacionReserva(@PathVariable Integer reservaId) {
+    public ResponseEntity<Notificacion> enviarNotificacionReserva(@PathVariable Long reservaId) {
         return new ResponseEntity<>(notificacionService.enviarNotificacionReserva(reservaId), HttpStatus.CREATED);
     }
     
     @PutMapping("/{id}/marcar-leido")
-    public ResponseEntity<Notificacion> marcarComoLeido(@PathVariable Integer id) {
+    public ResponseEntity<Notificacion> marcarComoLeido(@PathVariable Long id) {
         return new ResponseEntity<>(notificacionService.marcarComoLeido(id), HttpStatus.OK);
     }
 }

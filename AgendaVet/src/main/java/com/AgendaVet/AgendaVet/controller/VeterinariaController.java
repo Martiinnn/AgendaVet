@@ -30,7 +30,7 @@ public class VeterinariaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Veterinaria> getVeterinariaById(@PathVariable Integer id) {
+    public ResponseEntity<Veterinaria> getVeterinariaById(@PathVariable Long id) {
         Veterinaria veterinaria = veterinariaService.findById(id);
         return veterinaria != null ? 
                new ResponseEntity<>(veterinaria, HttpStatus.OK) : 
@@ -43,7 +43,7 @@ public class VeterinariaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Veterinaria> updateVeterinaria(@PathVariable Integer id, @RequestBody Veterinaria veterinaria) {
+    public ResponseEntity<Veterinaria> updateVeterinaria(@PathVariable Long id, @RequestBody Veterinaria veterinaria) {
         Veterinaria existingVeterinaria = veterinariaService.findById(id);
         if (existingVeterinaria == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ public class VeterinariaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVeterinaria(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteVeterinaria(@PathVariable Long id) {
         Veterinaria existingVeterinaria = veterinariaService.findById(id);
         if (existingVeterinaria == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -63,17 +63,17 @@ public class VeterinariaController {
     }
     
     @PostMapping("/{veterinariaId}/servicios")
-    public ResponseEntity<Servicio> addServicio(@PathVariable Integer veterinariaId, @RequestBody Servicio servicio) {
+    public ResponseEntity<Servicio> addServicio(@PathVariable Long veterinariaId, @RequestBody Servicio servicio) {
         return new ResponseEntity<>(veterinariaService.addServicio(veterinariaId, servicio), HttpStatus.CREATED);
     }
     
     @GetMapping("/{veterinariaId}/servicios")
-    public ResponseEntity<List<Servicio>> getServiciosByVeterinaria(@PathVariable Integer veterinariaId) {
+    public ResponseEntity<List<Servicio>> getServiciosByVeterinaria(@PathVariable Long veterinariaId) {
         return new ResponseEntity<>(veterinariaService.findServiciosByVeterinariaId(veterinariaId), HttpStatus.OK);
     }
     
     @PostMapping("/{veterinariaId}/horarios")
-    public ResponseEntity<?> updateHorarios(@PathVariable Integer veterinariaId, @RequestBody String horarios) {
+    public ResponseEntity<?> updateHorarios(@PathVariable Long veterinariaId, @RequestBody String horarios) {
         return new ResponseEntity<>(veterinariaService.updateHorarios(veterinariaId, horarios), HttpStatus.OK);
     }
 }

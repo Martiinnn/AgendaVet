@@ -5,9 +5,6 @@ import com.AgendaVet.AgendaVet.model.Mascota;
 import com.AgendaVet.AgendaVet.model.Veterinaria;
 import com.AgendaVet.AgendaVet.model.Servicio;
 import com.AgendaVet.AgendaVet.repository.ReservaRepository;
-import com.AgendaVet.AgendaVet.repository.UsuarioRepository;
-import com.AgendaVet.AgendaVet.repository.MascotaRepository;
-import com.AgendaVet.AgendaVet.repository.VeterinariaRepository;
 import com.AgendaVet.AgendaVet.service.ReservaService;
 import com.AgendaVet.AgendaVet.service.VeterinariaService;
 import com.AgendaVet.AgendaVet.service.ServicioService;
@@ -24,18 +21,6 @@ public class ReservaServiceImpl implements ReservaService {
     private ReservaRepository reservaRepository;
     
     @Autowired
-    @SuppressWarnings("unused")
-    private UsuarioRepository usuarioRepository;
-    
-    @Autowired
-    @SuppressWarnings("unused")
-    private MascotaRepository mascotaRepository;
-    
-    @Autowired
-    @SuppressWarnings("unused")
-    private VeterinariaRepository veterinariaRepository;
-    
-    @Autowired
     private VeterinariaService veterinariaService;
     
     @Autowired
@@ -50,7 +35,7 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public Reserva findById(Integer id) {
+    public Reserva findById(Long id) {
         return reservaRepository.findById(id).orElse(null);
     }
 
@@ -58,16 +43,25 @@ public class ReservaServiceImpl implements ReservaService {
     public Reserva save(Reserva reserva) {
         if (reserva.getVeterinariaId() != null) {
             Veterinaria veterinaria = veterinariaService.findById(reserva.getVeterinariaId());
+            if (veterinaria == null) {
+                throw new IllegalArgumentException("Veterinaria con id " + reserva.getVeterinariaId() + " no encontrada");
+            }
             reserva.setVeterinaria(veterinaria);
         }
         
         if (reserva.getServicioId() != null) {
             Servicio servicio = servicioService.findById(reserva.getServicioId());
+            if (servicio == null) {
+                throw new IllegalArgumentException("Servicio con id " + reserva.getServicioId() + " no encontrado");
+            }
             reserva.setServicio(servicio);
         }
         
         if (reserva.getMascotaId() != null) {
             Mascota mascota = mascotaService.findById(reserva.getMascotaId());
+            if (mascota == null) {
+                throw new IllegalArgumentException("Mascota con id " + reserva.getMascotaId() + " no encontrada");
+            }
             reserva.setMascota(mascota);
         }
         
@@ -75,22 +69,22 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         reservaRepository.deleteById(id);
     }
 
     @Override
-    public List<Reserva> findByUsuarioId(Integer usuarioId) {
+    public List<Reserva> findByUsuarioId(Long usuarioId) {
         return reservaRepository.findByUsuario_Id(usuarioId);
     }
 
     @Override
-    public List<Reserva> findByVeterinariaId(Integer veterinariaId) {
+    public List<Reserva> findByVeterinariaId(Long veterinariaId) {
         return reservaRepository.findByVeterinaria_Id(veterinariaId);
     }
 
     @Override
-    public Reserva updateEstado(Integer id, String estado) {
+    public Reserva updateEstado(Long id, String estado) {
         Reserva reserva = findById(id);
         if (reserva != null) {
             reserva.setEstado(estado);

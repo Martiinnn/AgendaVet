@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface ResenaService {
     List<Resena> findAll();
-    Resena findById(Integer id);
+    Resena findById(Long id);
     Resena save(Resena resena);
-    void deleteById(Integer id);
-    List<Resena> findByVeterinariaId(Integer veterinariaId);
-    List<Resena> findByUsuarioId(Integer usuarioId);
-    Double getPromedioCalificacionByVeterinaria(Integer veterinariaId);
+    void deleteById(Long id);
+    List<Resena> findByVeterinariaId(Long veterinariaId);
+    List<Resena> findByUsuarioId(Long usuarioId);
+    Double getPromedioCalificacionByVeterinaria(Long veterinariaId);
 }

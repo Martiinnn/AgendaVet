@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface ServicioService {
     List<Servicio> findAll();
-    Servicio findById(Integer id);
+    Servicio findById(Long id);
     Servicio save(Servicio servicio);
-    void deleteById(Integer id);
-    List<Servicio> findByVeterinariaId(Integer veterinariaId);
+    void deleteById(Long id);
+    List<Servicio> findByVeterinariaId(Long veterinariaId);
 }

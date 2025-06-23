@@ -19,7 +19,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     
     private String nombre;
     private String email;
@@ -36,4 +36,10 @@ public class Usuario {
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Notificacion> notificaciones;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
+    @JsonManagedReference("mascota-propietario")
+    private List<Mascota> mascotas;
+
 }

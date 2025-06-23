@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface ReservaService {
     List<Reserva> findAll();
-    Reserva findById(Integer id);
+    Reserva findById(Long id);
     Reserva save(Reserva reserva);
-    void deleteById(Integer id);
-    List<Reserva> findByUsuarioId(Integer usuarioId);
-    List<Reserva> findByVeterinariaId(Integer veterinariaId);
-    Reserva updateEstado(Integer id, String estado);
+    void deleteById(Long id);
+    List<Reserva> findByUsuarioId(Long usuarioId);
+    List<Reserva> findByVeterinariaId(Long veterinariaId);
+    Reserva updateEstado(Long id, String estado);
 }

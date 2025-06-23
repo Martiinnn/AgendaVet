@@ -5,7 +5,8 @@ import java.util.List;
 
 public interface UsuarioService {
     List<Usuario> findAll();
-    Usuario findById(Integer id);
+    Usuario findById(Long id);
     Usuario save(Usuario usuario);
-    void deleteById(Integer id);
+    void deleteById(Long id);
+    Usuario patchUsuario(Long id, Usuario usuario);
 }

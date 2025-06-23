@@ -1,10 +1,11 @@
 package com.AgendaVet.AgendaVet.repository;
 
 import com.AgendaVet.AgendaVet.model.Mascota;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
-    // Nada XD
+    List<Mascota> findByPropietario_Id(Long propietarioId);
 }

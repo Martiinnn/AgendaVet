@@ -35,11 +35,11 @@ public class Mascota {
     @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Reserva> reservas;    
 
-    public Integer getUsuarioId() {
+    public Long getUsuarioId() {
         return propietario != null ? propietario.getId() : null;
     }    
 
-    public void setUsuarioId(Integer usuarioId) {
+    public void setUsuarioId(Long usuarioId) {
         if (propietario == null) {
             propietario = new Usuario();
         }

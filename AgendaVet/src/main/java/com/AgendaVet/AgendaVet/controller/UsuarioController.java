@@ -29,7 +29,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id) {
+    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {
         Usuario usuario = usuarioService.findById(id);
         return usuario != null ? 
                new ResponseEntity<>(usuario, HttpStatus.OK) : 
@@ -42,7 +42,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
         Usuario existingUsuario = usuarioService.findById(id);
         if (existingUsuario == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
         Usuario existingUsuario = usuarioService.findById(id);
         if (existingUsuario == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

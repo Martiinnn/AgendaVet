@@ -7,7 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ResenaRepository extends JpaRepository<Resena, Integer> {
-    List<Resena> findByUsuario_Id(Integer usuarioId);
-    List<Resena> findByVeterinaria_Id(Integer veterinariaId);
+public interface ResenaRepository extends JpaRepository<Resena, Long> {
+    List<Resena> findByUsuario_Id(Long usuarioId);
+    List<Resena> findByVeterinaria_Id(Long veterinariaId);    
+
+    List<Resena> findByUsuario_IdAndPuntuacion(Long usuarioId, Integer puntuacion);
+    
+    List<Resena> findByVeterinaria_IdAndPuntuacionGreaterThanEqual(Long veterinariaId, Integer puntuacion);
+    
+    List<Resena> findByPuntuacionBetween(Integer puntuacionMin, Integer puntuacionMax);
 }
